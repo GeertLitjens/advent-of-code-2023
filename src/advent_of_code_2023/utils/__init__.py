@@ -36,7 +36,7 @@ class ColorFormatter(logging.Formatter):
 
 
 class ColorLogger(logging.Logger):
-    def __init__(self: "ColorFormatter", name: str) -> None:
+    def __init__(self: "ColorLogger", name: str) -> None:
         logging.Logger.__init__(self, name)
         color_formatter = ColorFormatter("%(message)s")
         console = logging.StreamHandler()
@@ -55,8 +55,8 @@ class Solution(ABC):
         self._answers2_path = self._data_dir / f"{day}_answers2.txt"
         self._day = day
         self._year = year
-        self._solution_part1 = None
-        self._solution_part2 = None
+        self._solution_part1: str = ""
+        self._solution_part2: str = ""
         self._user_agent = {"User-Agent": "advent-of-code-data v1.1.0"}
         self._session_token = {"session": os.environ["AOC_TOKEN"]}
         self._logger = logging.getLogger("aoclogger")
@@ -65,7 +65,10 @@ class Solution(ABC):
         if not self._input_data_path.exists():
             input_url = f"https://adventofcode.com/{self._year}/day/{self._day}/input"
             response = requests.get(
-                url=input_url, cookies=self._session_token, headers=self._user_agent
+                url=input_url,
+                cookies=self._session_token,
+                headers=self._user_agent,
+                timeout=10,
             )
             if response.ok:
                 with open(self._input_data_path, "w") as f:
@@ -75,7 +78,7 @@ class Solution(ABC):
         return self._input_data_path.read_text()
 
     @abstractmethod
-    def _parse_data(self: "Solution", input_data: str) -> AoCData:
+    def _parse_data(self: "Solution", input_data: AoCData) -> AoCData:
         return input_data
 
     @abstractmethod
@@ -88,7 +91,7 @@ class Solution(ABC):
 
     def solve(
         self: "Solution", part1: bool = True, part2: bool = True
-    ) -> Tuple[AoCData, AoCData]:
+    ) -> Tuple[str, str]:
         self._logger.info(f"Solving for day {self._day}")
         parse_start = time.time()
         parsed_data = self._parse_data(self._get_input_data())
@@ -100,7 +103,7 @@ class Solution(ABC):
             part1_end = time.time()
             self._logger.info(f"\tSolution for part 1: {self._solution_part1}")
             self._logger.info(f"\tTime needed for part 1: {part1_end - part1_start}s")
-            self._solution_part2 = None
+            self._solution_part2 = ""
         if part2:
             part2_start = time.time()
             self._solution_part2 = self._solve_part2(parsed_data)
@@ -122,6 +125,7 @@ class Solution(ABC):
                     cookies=self._session_token,
                     headers=self._user_agent,
                     data={"level": 1, "answer": str(self._solution_part1)},
+                    timeout=10,
                 )
                 if response.ok:
                     self._logger.debug("Response OK!")
@@ -145,6 +149,7 @@ class Solution(ABC):
                     cookies=self._session_token,
                     headers=self._user_agent,
                     data={"level": 2, "answer": str(self._solution_part2)},
+                    timeout=10,
                 )
                 if response.ok:
                     self._logger.debug("Response OK!")

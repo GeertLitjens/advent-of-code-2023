@@ -63,16 +63,18 @@ def cli(ctx: click.Context, debug: bool) -> None:
 )
 @click.pass_obj
 def run(
-    logger: logging.Logger, days: str, token: str, submit: bool, blog: bool
+    logger: logging.Logger,
+    days: list[str],
+    token: str,
+    submit: bool,
+    blog: bool,
 ) -> None:
     """
     Run a specific set of days, default is all days. If you want to run
     a specific part of a day, specify an a or a b after the day number
     (e.g. 11a, 12b)
     """
-    if "AOC_TOKEN" in os.environ:
-        pass
-    elif token:
+    if token:
         os.environ["AOC_TOKEN"] = token
     elif os.path.exists(".aoc_token"):
         os.environ["AOC_TOKEN"] = Path(".aoc_token").read_text()
@@ -111,7 +113,7 @@ def run(
     "days",
     nargs=-1,
     required=True,
-    type=click.INT,
+    type=click.STRING,
 )
 @click.option(
     "--overwrite/--no-overwrite",
@@ -137,7 +139,7 @@ def create(logger: logging.Logger, days: typing.List[int], overwrite: bool) -> N
         logger.debug(f"Original test path {out_test_path}")
         logger.debug(f"Move test path {test_path}")
 
-        if overwrite and out_path.exists() and test_path.exists:
+        if overwrite and out_path.exists() and test_path.exists():
             shutil.rmtree(out_path)
             os.remove(test_path)
         try:

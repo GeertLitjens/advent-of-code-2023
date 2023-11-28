@@ -1,7 +1,8 @@
+# type: ignore
 import tempfile
 
-import nox
-from nox_poetry import Session, session
+import nox  # pyright: ignore
+from nox_poetry import Session, session  # pyright: ignore
 
 nox.options.sessions = "lint", "mypy", "safety", "tests"
 locations = "src", "tests"
