@@ -1,0 +1,19 @@
+name: Update README ⭐
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: geertlitjens/advent-readme-stars@db0643f5b6a1d21cfa2271e08794fdc3a1bdadcd
+        with:
+          userId: 553977
+          sessionCookie: ${{ secrets.AOC_SESSION }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update README stars

@@ -1,0 +1,9 @@
+# .flake8
+[flake8]
+application-import-names = advent_of_code_2023,tests
+select = ANN,B,B9,BLK,C,E,F,I,S,W
+ignore = E203,E501,W503
+per-file-ignores = tests/*:S101
+max-complexity = 10
+max-line-length = 88
+exclude = day_template
