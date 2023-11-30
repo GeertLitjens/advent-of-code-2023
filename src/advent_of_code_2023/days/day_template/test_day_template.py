@@ -1,6 +1,6 @@
 import pytest
 
-from advent_of_code_2022.days.day<DAY_NUMBER>.solution import DaySolution
+from advent_of_code_2023.days.day<DAY_NUMBER>.solution import DaySolution
 
 
 @pytest.fixture

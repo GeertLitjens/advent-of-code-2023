@@ -18,7 +18,7 @@ from .utils import ColorLogger
 @click.pass_context
 def cli(ctx: click.Context, debug: bool) -> None:
     """
-    Solution of the Advent of Code 2022 as implemented by Geert Litjens in Python
+    Solution of the Advent of Code 2023 as implemented by Geert Litjens in Python
     """
     logging.setLoggerClass(ColorLogger)
     logger = logging.getLogger("aoclogger")
@@ -92,7 +92,7 @@ def run(
             part = day_nr[-1]
             day_nr = day_nr[:-1]
         day_module = importlib.import_module(
-            "advent_of_code_2022.days.day" + str(day_nr).zfill(2)[:2] + ".solution"
+            "advent_of_code_2023.days.day" + str(day_nr).zfill(2)[:2] + ".solution"
         )
         solution = day_module.DaySolution()
         if part:
