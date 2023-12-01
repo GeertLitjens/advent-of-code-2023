@@ -5,14 +5,15 @@ import sys
 import time
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import List, Tuple, TypeVar
+from typing import Generic, TypeVar
 
 import requests
 from colorama import Back, Fore, init
 
 init(autoreset=True)
 logging.addLevelName(25, "SUCCESS")
-AoCData = TypeVar("AoCData")
+
+ParsedAoCData = TypeVar("ParsedAoCData")
 
 
 class ColorFormatter(logging.Formatter):
@@ -44,8 +45,8 @@ class ColorLogger(logging.Logger):
         self.addHandler(console)
 
 
-class Solution(ABC):
-    def __init__(self: "Solution", day: int = 1, year: int = 2022) -> None:
+class Solution(ABC, Generic[ParsedAoCData]):
+    def __init__(self: "Solution", day: int = 1, year: int = 2023) -> None:
         init()
         self._data_dir = Path.home() / ".aoc" / str(year)
         if not self._data_dir.exists():
@@ -78,20 +79,20 @@ class Solution(ABC):
         return self._input_data_path.read_text()
 
     @abstractmethod
-    def _parse_data(self: "Solution", input_data: AoCData) -> AoCData:
-        return input_data
+    def _parse_data(self: "Solution", input_data: str) -> ParsedAoCData:
+        pass
 
     @abstractmethod
-    def _solve_part1(self: "Solution", parsed_data: AoCData) -> AoCData:
-        return parsed_data
+    def _solve_part1(self: "Solution", parsed_data: ParsedAoCData) -> str:
+        return ""
 
     @abstractmethod
-    def _solve_part2(self: "Solution", parsed_data: AoCData) -> AoCData:
-        return parsed_data
+    def _solve_part2(self: "Solution", parsed_data: ParsedAoCData) -> str:
+        return ""
 
     def solve(
         self: "Solution", part1: bool = True, part2: bool = True
-    ) -> Tuple[str, str]:
+    ) -> tuple[str, str]:
         self._logger.info(f"Solving for day {self._day}")
         parse_start = time.time()
         parsed_data = self._parse_data(self._get_input_data())
@@ -241,7 +242,7 @@ class Solution(ABC):
         toc_path.write_text(toc_text)
 
     @staticmethod
-    def _clean_code_for_md(snippet: List[str]) -> str:
+    def _clean_code_for_md(snippet: list[str]) -> str:
         leading_whitespace = len(snippet[0]) - len(snippet[0].lstrip(" "))
         snippet = [line[leading_whitespace:] for line in snippet]
         first_line_comment = 0

@@ -10,7 +10,7 @@ class DaySolution(Solution):
     def __init__(self: 'DaySolution', day: int = <DAY_NUMBER>, year: int = 2023) -> None:
         super().__init__(day, year)
 
-    def _parse_data(self: "DaySolution", input_data: str) -> AoCData:
+    def _parse_data(self: "DaySolution", input_data: AoCData) -> AoCData:
         """
         """
         return input_data
