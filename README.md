@@ -14,4 +14,9 @@ To use most features, you need your API token for Advent of Code, and either giv
 Good luck!
 
 <!--- advent_readme_stars table --->
+## 2023 Results
+
+| Day | Part 1 | Part 2 |
+| :---: | :---: | :---: |
+| [Day 1](http://geertlitjens.nl/advent-of-code-2021/days/day1.html) | ⭐ | ⭐ |
 <!--- advent_readme_stars table --->
