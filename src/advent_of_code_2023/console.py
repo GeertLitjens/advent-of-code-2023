@@ -113,7 +113,7 @@ def run(
     "days",
     nargs=-1,
     required=True,
-    type=click.STRING,
+    type=click.INT,
 )
 @click.option(
     "--overwrite/--no-overwrite",
@@ -126,14 +126,14 @@ def create(logger: logging.Logger, days: typing.List[int], overwrite: bool) -> N
     for day in days:
         logger.info(f"Creating structure for day {day}")
         in_path = Path(__file__).parent / "days" / "day_template"
-        out_path = Path(__file__).parent / "days" / f"day{day:02}"
+        out_path = Path(__file__).parent / "days" / f"day{int(day):02d}"
         out_solution_path = (
-            Path(__file__).parent / "days" / f"day{day:02}" / "solution.py"
+            Path(__file__).parent / "days" / f"day{day:02d}" / "solution.py"
         )
         out_test_path = (
-            Path(__file__).parent / "days" / f"day{day:02}/test_day_template.py"
+            Path(__file__).parent / "days" / f"day{day:02d}/test_day_template.py"
         )
-        test_path = Path(__file__).parent.parent.parent / f"tests/test_day{day:02}.py"
+        test_path = Path(__file__).parent.parent.parent / f"tests/test_day{day:02d}.py"
         logger.debug(f"Input path {in_path}")
         logger.debug(f"Output path {out_path}")
         logger.debug(f"Original test path {out_test_path}")
