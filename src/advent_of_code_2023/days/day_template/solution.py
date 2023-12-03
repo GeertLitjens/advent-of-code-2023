@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from advent_of_code_2023.utils import AoCData, Solution
+from advent_of_code_2023.utils import ParsedAoCData, Solution
 
 
 class DaySolution(Solution):
