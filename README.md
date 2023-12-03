@@ -20,4 +20,5 @@ Good luck!
 | :---: | :---: | :---: |
 | [Day 1](http://geertlitjens.nl/advent-of-code-2021/days/day1.html) | ⭐ | ⭐ |
 | [Day 2](http://geertlitjens.nl/advent-of-code-2021/days/day2.html) | ⭐ | ⭐ |
+| [Day 3](http://geertlitjens.nl/advent-of-code-2021/days/day3.html) | ⭐ | ⭐ |
 <!--- advent_readme_stars table --->
