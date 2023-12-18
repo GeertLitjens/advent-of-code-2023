@@ -34,4 +34,6 @@ Good luck!
 | [Day 14](http://geertlitjens.nl/advent-of-code-2021/days/day14.html) | ⭐ | ⭐ |
 | [Day 15](http://geertlitjens.nl/advent-of-code-2021/days/day15.html) | ⭐ | ⭐ |
 | [Day 16](http://geertlitjens.nl/advent-of-code-2021/days/day16.html) | ⭐ | ⭐ |
+| [Day 17](http://geertlitjens.nl/advent-of-code-2021/days/day17.html) | ⭐ | ⭐ |
+| [Day 18](http://geertlitjens.nl/advent-of-code-2021/days/day18.html) | ⭐ | ⭐ |
 <!--- advent_readme_stars table --->
